@@ -1,41 +1,36 @@
 const validator = require("validator");
-const isEmpty = require("is-empty");
 
-module.exports = validateRegisterInput =(data) =>{
+module.exports = validateRegisterInput = user =>{
     let errors = {};
 
-    data.name = !isEmpty(data.name)? data.name : "";
-    data.email = !isEmpty(data.email)? data.email : "";
-    data.password1 = !isEmpty(data.password1)? data.password1 : "";
-    data.password2 = !isEmpty(data.password2)? data.password2 : "";
-
-    if(validator.isEmpty(data.name)){
+    if(!user.name){
         errors.name = "Name field is required";
     }
 
-    if(validator.isEmpty(data.email)){
+    if(!user.email){
         errors.email = "Email field is required";
     }
+        else if(!validator.isEmail(user.email)){
+            errors.email = "Please provide a valid email"
+        }
 
-    if(validator.isEmpty(data.password1)){
+    if(!user.password1){
         errors.password1 = "Password field is required";
     }
-
-    if(validator.isEmpty(data.password2)){
-        errors.password2 = "Password field is required";
+    if(user.password1 < 8){
+            errors.password1 = "Password must be greater then 8"
+        }
+        
+    if(!user.password2){
+        errors.password2 = "Password field is required"
     }
-
-    if(!validator.isLength(data.password1 , { min : 6 , max : 30})){
-        errors.passwordLength = "Password must be atleast 6 characters";
-    }
-
-    if(!validator.equals(data.password1 , data.password2)){
-        errors.passwordMatch = "Password did not match";
-    }
+        else if(user.password1 !== user.password2){
+            errors.password1 = "Password did not match"
+        }
 
     return {
         errors,
-        isValid: isEmpty(errors)
+        isValid: Object.keys(errors).length === 0
     }
 
 }

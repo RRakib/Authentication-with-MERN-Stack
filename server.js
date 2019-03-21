@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const key = require("./Config/key")
+const key = require("./Config/key");
+const users = require("./Controller/users")
 const app = express();
 
 // Connecting to mongodb
@@ -16,11 +17,13 @@ mongoose.connect(key.mongodbURI , { useNewUrlParser : true})
 app.use(express.urlencoded({extended : false}))
 app.use(express.json())
 
-
+// Route
+app.use("/api/user" , users)
 
 // Defining Port
 port = process.env.PORT || 5000;
 
+// Listening to port
 app.listen(port , () => {
     console.log("Listening To Port 5000");
 })

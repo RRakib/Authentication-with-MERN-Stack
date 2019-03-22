@@ -17,13 +17,21 @@ router.post("/login" , (req, res) => {
 // Registration
 router.post("/register" , (req, res) => {
     const{email , name , password1 , password2} = req.body
-    let reg = registration({email , name , password1 , password2})
+    let reg = registration({name , email , password1 , password2})
 
     if(!reg.isValid){
         res.status(400).json(reg.errors)
     }
     else{
-        res.status(200).json({message : "Successfully Registered"})
+        user.findOne({email})
+            .then(user => {
+                if(user){
+
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 })    
 

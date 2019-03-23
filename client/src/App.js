@@ -1,4 +1,3 @@
-import './App.css';
 import React, { Component } from 'react';
 import Home from "./Components/Home/Home"
 import Login from "./Components/Login/Login"
@@ -9,7 +8,7 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div className="App">
+        <div className="container">
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/Login"  component={Login}  />

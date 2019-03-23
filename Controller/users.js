@@ -1,5 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const router  = express.Router();
 
 // Input Validation
@@ -27,11 +28,17 @@ router.post("/login" , (req, res) => {
                         if(err){
                             console.log(err)
                         }
-                        if(isMatch){
-                            return res.status(200).json({message : "You have successfully logged in"})
+                        if(!isMatch){
+                            return res.status(404).json({message : "Password Did not Match"})
+                            
                         }
                         else{
-                            return res.status(404).json({message : "Password Did not Match"})
+                            let token = jwt.sign({
+                                _id: user._id,
+                                email: user.email,
+                                name: user.name,
+                            }, "SECRET" , {expiresIn : "2h"})
+                            return res.status(200).json({message : "Login Successful", token : token})
                         }
                     })
                 }

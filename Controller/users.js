@@ -12,7 +12,31 @@ const User = require("../Model/user");
 // Login 
 router.post("/login" , (req, res) => {
     const {email , password} = req.body
-    res.json({message : email + password})
+    let log = login({ email , password });
+    if(!log.isValid){
+        res.status(400).json(log.errors)
+    }
+    else{
+        User.findOne({email})
+            .then(user => {
+                if(!user){
+                    return res.status(404).json({message: "Not Registered"})
+                }
+                else{
+                    bcrypt.compare(password , user.password ,  (err , isMatch) => {
+                        if(err){
+                            console.log(err)
+                        }
+                        if(isMatch){
+                            return res.status(200).json({message : "You have successfully logged in"})
+                        }
+                        else{
+                            return res.status(404).json({message : "Password Did not Match"})
+                        }
+                    })
+                }
+            })
+    }
 })
 
 // Registration

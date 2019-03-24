@@ -1,13 +1,14 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
-const Home = () => {
+const Home = (props) => {
     return(
         <div>
-            <h2>Home</h2>
-            <Link to="/">Home</Link>
-            <Link to="/Login">Login</Link>
-            <Link to="/Register">Register</Link>
+            <nav className={props.nav}>
+                <Link to="/" className="nav-link">Home</Link>
+                <Link to="/Login" className="nav-link">Login</Link>
+                <Link to="/Register" className="nav-link">Register</Link>
+            </nav>
         </div>
     )
 }

@@ -8,9 +8,10 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div className="container">
+        <div className="container bg-light pb-5">
+          <h2 className="text-primary ml-3">Authentication</h2>
           <Switch>
-            <Route path="/" exact component={Home} />
+            <Route path="/" exact component={() => <Home nav="nav" />} />
             <Route path="/Login"  component={Login}  />
             <Route path="/Register"  component={Register}  />
           </Switch>

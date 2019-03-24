@@ -9,6 +9,7 @@ class Register extends Component{
             email : "",
             password1 : "",
             password2 : "",
+            error: {}
         }
     }
 
@@ -18,11 +19,14 @@ class Register extends Component{
             [name] : value
         })
     }
+    handleSubmit = (e) => {
+        e.preventDefault();
+    }
 
 
     render(){
         return(
-            <div className="m-3 ">
+            <div>
                 <Home nav="nav"/>
                 <h2 className="pt-3 pb-3">Register</h2>
                 <form>

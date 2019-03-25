@@ -58,9 +58,7 @@ router.post("/register" , (req, res) => {
         User.findOne({email})
             .then(user => {
                 if(user){
-                    return res.status(400).json({
-                        message : "Email Already Registered"
-                    })
+                    return resourceError(res , "Email Already Registered");
                 }
                 else{
                     let newUser = User({

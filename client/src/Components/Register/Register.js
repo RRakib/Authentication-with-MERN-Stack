@@ -25,24 +25,28 @@ class Register extends Component{
     handleSubmit = (e) => {
         e.preventDefault();
         const {name , email , password1 , password2} = this.state
-        this.props.register({
+        this.props.register(
+            {
             name ,
             email ,
             password1 , 
             password2
-        })
+            },
+            this.props.history
+        )
+        console.log(this.props.history)
     }
 
 
     render(){
-        const {name , email , password1 , password2} = this.props.state.auth.errors;
+        const err = this.props.state.auth.errors;
         return(
             <div>
                 <Home nav="nav"/>
                 <div className="form-group col-md-7">
                     <h2 className="pt-3 pb-3">Register</h2>
                     <form onSubmit={this.handleSubmit}>
-                            <p className="text-danger ml-1"> {name}</p>
+                            { err && <p className="text-danger ml-1"> {err.name}</p>}
                             <input
                                 name = "name"
                                 type = "text"
@@ -52,7 +56,7 @@ class Register extends Component{
                                 placeholder = "Please Enter Your Name..."
                             /> 
                             <br />
-                            <p className="text-danger ml-1"> {email}</p>
+                            { err && <p className="text-danger ml-1"> {err.email}</p>}
                             <input 
                                 name = "email"
                                 type = "email"
@@ -62,7 +66,7 @@ class Register extends Component{
                                 placeholder = "Please Enter Your email..."
                             />
                             <br />
-                            <p className="text-danger ml-1"> {password1}</p>
+                            { err && <p className="text-danger ml-1"> {err.password1}</p>}
                             <input 
                                 type = "password"
                                 name = "password1"
@@ -72,7 +76,7 @@ class Register extends Component{
                                 placeholder = "Please Enter Your Password..."
                             />
                             <br />
-                            <p className="text-danger ml-1"> {password2}</p>
+                            { err && <p className="text-danger ml-1"> {err.password2}</p>}
                             <input
                                 type = "password" 
                                 name = "password2"
@@ -101,7 +105,7 @@ const mapStoreToProps = (state) =>{
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-        register : (user) => dispatch(register(user))
+        register : (user , history) => dispatch(register(user , history))
     }
 }
 

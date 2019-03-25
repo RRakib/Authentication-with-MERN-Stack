@@ -22,9 +22,9 @@ app.use(express.urlencoded({extended : false}))
 app.use("/api/user" , users)
 
 // Defining Port
-port = process.env.PORT || 5000;
+port = process.env.PORT || 4000;
 
 // Listening to port
 app.listen(port , () => {
-    console.log("Listening To Port 5000");
+    console.log("Listening To Port 4000");
 })

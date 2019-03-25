@@ -18,7 +18,7 @@ module.exports = validateRegisterInput = user =>{
         errors.password1 = "Password field is required"
     }
         else if(user.password1.length <= 8){
-            errors.password1 = "Password must be greater then 8"
+            errors.password1 = "Password must be greater then 8 character"
         }
         
     if(!user.password2){

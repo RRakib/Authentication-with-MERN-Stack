@@ -45,6 +45,7 @@ class Register extends Component{
                 <Home nav="nav"/>
                 <div className="form-group col-md-7">
                     <h2 className="pt-3 pb-3">Register</h2>
+                    { err && <strong className="text-danger ml-1"> {err.message}</strong>}
                     <form onSubmit={this.handleSubmit}>
                             { err && <p className="text-danger ml-1"> {err.name}</p>}
                             <input

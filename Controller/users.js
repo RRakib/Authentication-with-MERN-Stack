@@ -29,7 +29,7 @@ router.post("/login" , (req, res) => {
                             console.log(err)
                         }
                         if(!isMatch){
-                            return res.status(404).json({message : "Password Did not Match"})
+                            return res.status(404).json({message : "Incorrect Password"})
                             
                         }
                         else{
@@ -58,7 +58,7 @@ router.post("/register" , (req, res) => {
         User.findOne({email})
             .then(user => {
                 if(user){
-                    return resourceError(res , "Email Already Registered");
+                    return res.status(400).json({message : "Email Already Registered"})
                 }
                 else{
                     let newUser = User({

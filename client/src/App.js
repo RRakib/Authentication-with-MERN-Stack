@@ -1,3 +1,4 @@
+import { connect } from "react-redux"
 import React, { Component } from 'react';
 import Home from "./Components/Home/Home"
 import Login from "./Components/Login/Login"
@@ -6,6 +7,7 @@ import { BrowserRouter , Route , Switch} from "react-router-dom";
 
 class App extends Component {
   render() {
+    console.log(this.props)
     return (
       <BrowserRouter>
         <div className="container bg-light pb-5">
@@ -15,10 +17,13 @@ class App extends Component {
             <Route path="/Login"  component={Login}  />
             <Route path="/Register"  component={Register}  />
           </Switch>
+
         </div>
       </BrowserRouter>
     );
   }
 }
+
+
 
 export default App;
